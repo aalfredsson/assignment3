@@ -9,25 +9,25 @@
     @csrf
     <div class="form-group">
         <label for="title">Title</label>
-        <input type="text" class="form-control" id="title" name="title">
+        <input type="text" class="form-control" id="title" name="title" value="{{ $product->title }}">
     </div>
     <div class="form-group">
         <label for="price">Pris</label>
-        <input type="text" class="form-control" id="price" name="price">
+        <input type="text" class="form-control" id="price" name="price" value="{{ $product->price }}">
     </div>
     <div class="form-group">
         <label for="brand">Märke</label>
-        <input type="text" class="form-control" id="brand" name="brand">
+        <input type="text" class="form-control" id="brand" name="brand" value="{{ $product->brand }}">
     </div>
     <div class="form-group">
         <label for="description">Beskrivning</label>
-        <input type="text" class="form-control" id="description" name="description">
+        <input type="text" class="form-control" id="description" name="description" value="{{ $product->description }}">
     </div>
     <div class="form-group">
         <label for="image">Länk till bild</label>
-        <input type="text" class="form-control" id="image" name="image">
+        <input type="text" class="form-control" id="image" name="image" value="{{ $product->image }}">
     </div>
-    <button type="submit" class="btn btn-success">Uppdatera film</button>
+    <button type="submit" class="btn btn-success">Uppdatera produkt</button>
 </form>
 
 @endsection
