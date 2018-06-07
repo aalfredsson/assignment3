@@ -30,6 +30,7 @@ class ProductController extends Controller
     public function create()
     {
         // 
+        return view("products.create");
     }
 
     /**
@@ -41,6 +42,15 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
+        $product = new product;
+        $product->title = $request->input("title");
+        $product->price = $request->input("price");
+        $product->image = $request->input("image");
+        $product->brand = $request->input("brand");
+        $product->description = $request->input("description");
+        $product->save();
+
+        return redirect()->route('products.index');
     }
 
     /**
@@ -51,7 +61,13 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        //Show product info based on id
+        $product = Product::find($id);
+
+        return view("products.show", [
+            "product" => $product
+        ]);
+
     }
 
     /**
@@ -63,6 +79,11 @@ class ProductController extends Controller
     public function edit($id)
     {
         //
+        $product = Product::find($id);
+
+        return view("products.edit", [
+            "product" => $product
+        ]);
     }
 
     /**
@@ -75,6 +96,15 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $product = product::find($id);
+        $product->title = $request->input("title");
+        $product->price = $request->input("price");
+        $product->image = $request->input("image");
+        $product->brand = $request->input("brand");
+        $product->description = $request->input("description");
+        $product->save();
+
+        return redirect()->route('products.index');
     }
 
     /**
@@ -86,5 +116,8 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+        Product::destroy($id);
+        
+        return redirect()->route('products.index');
     }
 }
