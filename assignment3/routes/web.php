@@ -18,4 +18,5 @@ Route::get('/', function () {
 Route::resource('/products', 'ProductController');
 Route::resource('/reviews', 'ReviewController');
 Route::resource('/stores', 'StoreController');
-
+Route::get('/reviews/create/{id}', 'ReviewController@create');
+Route::post('/reviews/{id}', 'ReviewController@store');

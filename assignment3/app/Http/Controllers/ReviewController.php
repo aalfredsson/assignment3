@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Review;
+use App\Product;
 use Illuminate\Http\Request;
 
 class ReviewController extends Controller
@@ -14,6 +16,12 @@ class ReviewController extends Controller
     public function index()
     {
         //
+        $reviews = Review::all();
+
+        return view("reviews.index", [
+            "reviews" => $reviews
+        ]);
+        
     }
 
     /**
@@ -21,9 +29,14 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($product_id)
     {
         //
+        $product = Product::find($product_id);
+
+        return view("reviews.create", [
+            "product" => $product
+        ]);
     }
 
     /**
@@ -32,9 +45,18 @@ class ReviewController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
         //
+        $store = new Review;
+        $store->comment = $request->input("comment");
+        $store->name = $request->input("name");
+        $store->grade = $request->input("grade");
+        $store->product_id = $id;
+
+        $store->save();
+
+        return redirect()->route('products.show', $id);
     }
 
     /**
@@ -46,6 +68,10 @@ class ReviewController extends Controller
     public function show($id)
     {
         //
+        $reviews = Review::all();
+        return view("reviews.show", [
+            "reviews" => $reviews
+        ]);
     }
 
     /**
@@ -57,6 +83,11 @@ class ReviewController extends Controller
     public function edit($id)
     {
         //
+        $review = Review::find($id);
+
+        return view("reviews.edit", [
+            "review" => $review
+        ]);
     }
 
     /**
@@ -69,6 +100,15 @@ class ReviewController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $review = Review::find($id);
+        $review->comment = $request->input("comment");
+        $review->name = $request->input("name");
+        $review->grade = $request->input("grade");
+        $review->product_id = $review->product_id;
+
+        $review->save();
+
+        return redirect()->route('products.show', $review->product_id);
     }
 
     /**
@@ -80,5 +120,8 @@ class ReviewController extends Controller
     public function destroy($id)
     {
         //
+        Review::destroy($id);
+        
+        return redirect()->route('reviews.index');
     }
 }

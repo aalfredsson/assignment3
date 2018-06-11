@@ -30,7 +30,13 @@
                     <a class="nav-link" href="{{ route('products.index') }}">Start <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
+                    <a class="nav-link" href="{{ route('stores.index') }}">Butiker <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
                     <a class="nav-link" href="{{ route('products.create') }}">Lägg till en produkt <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ route('reviews.index') }}">Recensioner <span class="sr-only">(current)</span></a>
                 </li>
             </div>
         </nav>

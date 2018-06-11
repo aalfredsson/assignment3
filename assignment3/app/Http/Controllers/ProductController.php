@@ -42,7 +42,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
-        $product = new product;
+        $product = new Product;
         $product->title = $request->input("title");
         $product->price = $request->input("price");
         $product->image = $request->input("image");
@@ -63,8 +63,9 @@ class ProductController extends Controller
     {
         //Show product info based on id
         $product = Product::find($id);
-
-        return view("products.show", [
+        $product->stores = $product->stores;
+        $product->reviews = $product->reviews;
+        return view("reviews.show", [
             "product" => $product
         ]);
 
@@ -96,7 +97,7 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $product = product::find($id);
+        $product = Product::find($id);
         $product->title = $request->input("title");
         $product->price = $request->input("price");
         $product->image = $request->input("image");

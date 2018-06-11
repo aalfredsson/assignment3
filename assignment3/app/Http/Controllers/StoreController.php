@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Store;
 
 class StoreController extends Controller
 {
@@ -14,6 +15,11 @@ class StoreController extends Controller
     public function index()
     {
         //
+        $stores = Store::all();
+
+        return view("stores.index", [
+            "stores" => $stores
+        ]);
     }
 
     /**
@@ -24,6 +30,7 @@ class StoreController extends Controller
     public function create()
     {
         //
+        return view("stores.create");
     }
 
     /**
@@ -35,6 +42,13 @@ class StoreController extends Controller
     public function store(Request $request)
     {
         //
+        $store = new Store;
+        $store->city = $request->input("city");
+        $store->name = $request->input("name");
+
+        $store->save();
+
+        return redirect()->route('stores.index');
     }
 
     /**
@@ -46,6 +60,11 @@ class StoreController extends Controller
     public function show($id)
     {
         //
+        $store = Store::find($id);
+
+        return view("stores.show", [
+            "store" => $store
+        ]);
     }
 
     /**
@@ -57,6 +76,11 @@ class StoreController extends Controller
     public function edit($id)
     {
         //
+        $store = Store::find($id);
+
+        return view("stores.edit", [
+            "store" => $store
+        ]);
     }
 
     /**
@@ -69,6 +93,13 @@ class StoreController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $store = Store::find($id);
+        $store->title = $request->input("city");
+        $store->price = $request->input("name");
+
+        $store->save();
+
+        return redirect()->route('stores.index');
     }
 
     /**
@@ -80,5 +111,8 @@ class StoreController extends Controller
     public function destroy($id)
     {
         //
+        Store::destroy($id);
+        
+        return redirect()->route('stores.index');
     }
 }
