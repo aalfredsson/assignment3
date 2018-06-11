@@ -20,3 +20,7 @@ Route::resource('/reviews', 'ReviewController');
 Route::resource('/stores', 'StoreController');
 Route::get('/reviews/create/{id}', 'ReviewController@create');
 Route::post('/reviews/{id}', 'ReviewController@store');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
