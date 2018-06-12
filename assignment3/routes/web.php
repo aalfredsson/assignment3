@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::resource('/products', 'ProductController');
 Route::resource('/reviews', 'ReviewController');
@@ -29,4 +27,4 @@ Route::group(["middleware" => ["auth"]], function() {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
