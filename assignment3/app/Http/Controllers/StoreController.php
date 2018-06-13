@@ -98,8 +98,8 @@ class StoreController extends Controller
     {
         //
         $store = Store::find($id);
-        $store->title = $request->input("city");
-        $store->price = $request->input("name");
+        $store->city = $request->input("city");
+        $store->name = $request->input("name");
 
         $store->save();
 
